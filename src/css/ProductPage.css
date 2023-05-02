@@ -1,0 +1,42 @@
+.product-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 50px;
+}
+
+.product-card{
+    /* background-color: #EFEAE9; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style:double;
+    padding: 10px;
+    
+}
+
+.addtocart-btn{
+    cursor: pointer;
+    width: 5rem;
+    margin-top: 10px;
+    border-radius: 7px;
+    background-color: white;
+}
+.addtocart-btn:hover{
+    background-color:#48816B;
+    color: white;;
+}
+
+.outofstock-p{
+    color: red;
+}
+
+.filter-container{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 20px;
+}
