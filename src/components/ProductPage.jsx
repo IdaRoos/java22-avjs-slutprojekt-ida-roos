@@ -54,7 +54,8 @@ export default function ProductPage({ addToCart }) {
       [id]: count + 1, // Add a new key-value pair to the object, where the key is the 'id' of the product being added to the cart, and the value is one more than the previous count of that product (or 1 if the product wasn't previously in the cart).
     });
   }
-  // Todo comment
+  
+// Filters the products based on the selected price range filter
   function handleFilterPrice(product, filter) {
     switch (filter) {
       case "0-100":
