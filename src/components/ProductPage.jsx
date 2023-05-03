@@ -13,7 +13,7 @@ export default function ProductPage({ addToCart }) {
       "https://webshop-84703-default-rtdb.europe-west1.firebasedatabase.app/Store.json";
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
 
     if (data) {
       const newProducts = Object.keys(data).map((key) => {
@@ -32,14 +32,17 @@ export default function ProductPage({ addToCart }) {
   }
 
   // Call the getProducts function when the component mounts
-
   useEffect(() => {
     getProducts();
   }, []);
 
   // Handle adding a product to the cart
   function handleAddToCartClick(product) {
+    // Destructuring the "product" object to get the values of the properties
     const { id, namn, pris, lagersaldo } = product;
+
+    // Hämtar värdet av count från productCounts objektet, baserat på id av produkten.
+    //Om produkten redan finns i kundvagnen och count är större än eller lika med lagersaldo kommer ett felmeddelande att visas.
     const count = productCounts[id] || 0;
     if (count >= lagersaldo) {
       return alert(
@@ -54,8 +57,8 @@ export default function ProductPage({ addToCart }) {
       [id]: count + 1, // Add a new key-value pair to the object, where the key is the 'id' of the product being added to the cart, and the value is one more than the previous count of that product (or 1 if the product wasn't previously in the cart).
     });
   }
-  
-// Filters the products based on the selected price range filter
+
+  // Filters the products based on the selected price range filter
   function handleFilterPrice(product, filter) {
     switch (filter) {
       case "0-100":
