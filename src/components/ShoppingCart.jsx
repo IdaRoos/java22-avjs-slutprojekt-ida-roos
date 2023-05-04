@@ -18,29 +18,32 @@ export default function ShoppingCart({
   }
 
   async function updateInventory(cartItems) {
-    const url =
-      "https://webshop-84703-default-rtdb.europe-west1.firebasedatabase.app/Store.json";
+    // Create a dictionary to group cart items by product ID
+    const groupedItems = {};
+    for (const item of cartItems) {
+      const productId = item.id;
+      if (!groupedItems[productId]) {
+        groupedItems[productId] = [];
+      }
+      groupedItems[productId].push(item);
+    }
 
-    // Loop through each item in the cart and update its inventory in the database
-    for (let i = 0; i < cartItems.length; i++) {
-      const productId = cartItems[i].id;
+    // Update inventory for each product in the dictionary
+    for (const productId in groupedItems) {
       const productURL = `https://webshop-84703-default-rtdb.europe-west1.firebasedatabase.app/Store/${productId}.json`;
 
       // Fetch the current data for the product from the database
-
       const response = await fetch(productURL);
       const data = await response.json();
+      console.log(data);
       const currentInventory = data.lagersaldo;
 
-      // Decrement the inventory by 1, but not lower than 0
-
-      let updatedInventory = currentInventory - 1;
-      if (updatedInventory < 0) {
-        updatedInventory = 0;
-      }
+      // Calculate the total inventory decrease for the product
+      const numItems = groupedItems[productId].length;
+      const inventoryDecrease = Math.min(currentInventory, numItems);
 
       // Update the inventory for the product in the database
-
+      const updatedInventory = currentInventory - inventoryDecrease;
       const options = {
         method: "PATCH",
         body: JSON.stringify({ lagersaldo: updatedInventory }),
@@ -48,7 +51,6 @@ export default function ShoppingCart({
           "Content-type": "application/json",
         },
       };
-
       const response2 = await fetch(productURL, options);
       await response2.json();
     }
