@@ -5,10 +5,15 @@
     justify-content: end;
    gap: 1rem;
    padding: 30px;
-   padding-right:50px;
 }
 
 .navbar-p{
     cursor: pointer;
     font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.navbar-p:hover{
+    text-decoration:underline;
+    opacity: 0.5;
+  transition: 0.2s;
 }
