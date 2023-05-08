@@ -35,7 +35,6 @@ export default function ShoppingCart({
       // Fetch the current data for the product from the database
       const response = await fetch(productURL);
       const data = await response.json();
-      console.log(data);
       const currentInventory = data.lagersaldo;
 
       // Calculate the total inventory decrease for the product
