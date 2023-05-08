@@ -56,21 +56,18 @@ export default function ShoppingCart({
     }
   }
 
-  // Call the updateInventory function to update the database with the new inventory levels
+  //  Function that updates the database with the new inventory levels
   async function handlePurchase() {
     await updateInventory(cartItems);
 
-    // Clear the cart and set purchaseComplete to true to display the thank you message
     clearCart();
     setPurchaseComplete(true);
   }
 
+  // Function that clears the cart and resets purchaseComplete to false to show the cart again
   function removeAllItems() {
-    // Clear the cart and reset purchaseComplete to false to show the cart again
     clearCart();
     setPurchaseComplete(false);
-
-    // Call the clearCartAndShowProducts function to display the products again
     clearCartAndShowProducts();
   }
 

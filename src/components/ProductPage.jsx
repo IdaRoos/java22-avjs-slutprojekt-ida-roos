@@ -13,7 +13,6 @@ export default function ProductPage({ addToCart }) {
       "https://webshop-84703-default-rtdb.europe-west1.firebasedatabase.app/Store.json";
     const response = await fetch(url);
     const data = await response.json();
-    // console.log(data);
 
     if (data) {
       const newProducts = Object.keys(data).map((key) => {
@@ -41,8 +40,6 @@ export default function ProductPage({ addToCart }) {
     // Destructuring the "product" object to get the values of the properties
     const { id, namn, pris, lagersaldo } = product;
 
-    // Hämtar värdet av count från productCounts objektet, baserat på id av produkten.
-    //Om produkten redan finns i kundvagnen och count är större än eller lika med lagersaldo kommer ett felmeddelande att visas.
     const count = productCounts[id] || 0;
     if (count >= lagersaldo) {
       return alert(
@@ -52,9 +49,8 @@ export default function ProductPage({ addToCart }) {
     const item = { id, namn, pris }; // Create a new object 'item' with the properties 'id', 'namn', and 'pris' taken from the 'product' object that was passed as an argument to the function.
     addToCart(item); // Add the new 'item' to the cart.
     setProductCounts({
-      // Update the 'productCounts' state by creating a new object with the spread operator and adding a new key-value pair.
-      ...productCounts, // Spread the existing 'productCounts' object to include all of its previous key-value pairs.
-      [id]: count + 1, // Add a new key-value pair to the object, where the key is the 'id' of the product being added to the cart, and the value is one more than the previous count of that product (or 1 if the product wasn't previously in the cart).
+      ...productCounts,
+      [id]: count + 1,
     });
   }
 
