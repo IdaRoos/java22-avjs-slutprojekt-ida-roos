@@ -63,7 +63,7 @@ export default function ShoppingCart({
     setPurchaseComplete(true);
   }
 
-  // Function that clears the cart and resets purchaseComplete to false to show the cart again
+  // Function that clears the cart and shows the cart again
   function removeAllItems() {
     clearCart();
     setPurchaseComplete(false);
